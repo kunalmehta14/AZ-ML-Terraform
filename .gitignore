@@ -1,0 +1,18 @@
+##########################
+## TERRAFORM TEMP FILES ##
+##########################
+.terraform
+.terraform.lock.hcl
+terraform.tfstate.backup
+#############################
+## TERRAFORM SECRETS FILES ##
+#############################
+azure-grafana-access-token.txt
+variables.tf
+az-environment
+azvm_ssh
+azvm_ssh.pub
+providers.tf
+*.pem
+*.zip
+datascience-env/*

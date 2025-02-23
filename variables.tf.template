@@ -1,0 +1,147 @@
+variable "ARM_CLIENT_ID" {
+  type = string
+  default = "<ARM_CLIENT_ID>"
+}
+variable "ARM_CLIENT_SECRET" {
+  type = string
+  default = "<ARM_CLIENT_SECRET>"
+}
+variable "ARM_SUBSCRIPTION_ID" {
+  type = string
+  default = "<ARM_SUBSCRIPTION_ID>"
+}
+variable "ARM_TENANT_ID" {
+  type = string
+  default = "<ARM_TENANT_ID>"
+}
+
+resource "random_string" "suffix" {  
+  length           = 4  
+  special          = false  
+  upper            = false  
+}
+
+variable "resource_tags" {
+  type = map(string)
+  default = {
+    createdBy = "<USERNAME-TAG>"
+    deploymentType = "Terraform"
+    description = "<PROJECT_DESCRIPTION>"
+  }
+}
+
+variable "location" {
+  type = string
+  default = "<LOCATION>"
+}
+
+variable "mlcompute" {
+  type = object({
+    name = string
+    virtual_machine_size = string
+    authorization_type = string
+    ssh_key = string
+    ssh_admin_user = string
+    vm_priority = string
+  })
+  default = {
+    name = "<ML-COMPUTE-NAME>"
+    virtual_machine_size = "<ML-COMPUTE-MACHINE-SIZE>"
+    authorization_type = "<ML-COMPUTE-AUTHTYPE>"
+    vm_priority = "<ML-COMPUTE-PRIRORITY>"
+    ssh_key = "<ML-COMPUTE-SSH-PUB-KEY>"
+    ssh_admin_user = "<ML-COMPUTE-SSH-USERNAME>"
+  }
+}
+
+variable "azvnet" {
+  type = object(
+    {
+      name = string
+      address_prefixes = list(string)
+    }
+  )
+  default = {
+    name = "<VNET-NAME>"
+    address_prefixes = ["<VNET-SUBNET/MASK>"]
+  }
+}
+
+variable "azsnet" {
+  type = object(
+    {
+      name = string
+      address_prefixes = list(string)
+    }
+  )
+  default = {
+    name = "<SNET-NAME>"
+    address_prefixes = ["<SNET-SUBNET/MASK>"]
+  }
+}
+
+variable "azsa" {
+  type = object({
+    name = string
+    account_tier = string
+    account_replication_type = string
+  })
+  default = {
+    name = "<STORAGE-ACCOUNT-NAME>"
+    account_tier = "Standard"
+    account_replication_type = "LRS"
+  }  
+}
+
+variable "azacr" {
+  type = object({
+    name = string
+    sku = string
+  })
+  default = {
+    name = "<AZURE-CONTAINER-REGISTRY-NAME>"
+    sku = "Basic"
+  }
+}
+
+variable "mlcontainer" {
+  type = string
+  default = "<ML-CONTAINER-NAME>"
+}
+
+variable "mldatastore" {
+  type = string
+  default = "<ML-DATASTORE-NAME>"
+}
+
+variable "datafactory" {
+  type = string
+  default = "<DATAFACTORY-NAME>"
+}
+
+variable "azkeyvault"{
+  type = object({
+    name = string
+    sku = string
+  })
+  default = {
+    name = "<AZURE-KEYVAULT-NAME>"
+    sku = "standard"
+  }
+}
+
+variable "ai_hub" {
+  type = string
+  default = "<AI-FOUNDARY-HUB-NAME>"
+}
+
+variable "ai_project" {
+  type = string
+  default = "<AI-FOUNDARY-PROJECT-1-NAME>"
+}
+
+variable "azaisku" {
+    type        = string
+    description = "The sku name of the Azure Analysis Services server to create. Choose from: B1, B2, D1, S0, S1, S2, S3, S4, S8, S9. Some skus are region specific. See https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#availability-by-region"
+    default     = "<SKU-TYPE>"
+}
