@@ -71,23 +71,25 @@ The project includes template files for the <b>providers.tf</b> and variables.tf
 ```mermaid
 graph LR
     subgraph Azure Subscription
-        C(Storage Account)
-        D(Storage Container)
-        E(Virtual Network)
-        F(Subnet)
-        I(Key Vault)
-        J(Application Insights)
-        K(Azure Container Registeries)
-        subgraph Resource Environment ML [ml-resource-group]
-            A(Machine Learning Workspace)
-            B(Compute Cluster)
-            N(Datastore Blob)
-        end
-        subgraph Resource Environment AI [ai-resource-group]
-            G(AI Foundary)
-            H(AI Services)
-            L(AI Hub)
-            M(AI Project)
+        subgraph Resource Group
+            C(Storage Account)
+            D(Storage Container)
+            E(Virtual Network)
+            F(Subnet)
+            I(Key Vault)
+            J(Application Insights)
+            K(Azure Container Registeries)
+            subgraph Resource Environment ML [ml-environment]
+                A(Machine Learning Workspace)
+                B(Compute Cluster)
+                N(Datastore Blob)
+            end
+            subgraph Resource Environment AI [ai-environment]
+                G(AI Foundary)
+                H(AI Services)
+                L(AI Hub)
+                M(AI Project)
+            end
         end
     end
    
