@@ -66,6 +66,66 @@ The project includes template files for the <b>providers.tf</b> and variables.tf
 <b>providers.tf.template</b>: Template for the providers.tf file. Copy this file to <b>providers.tf</b> and replace the placeholder values with your actual Azure credentials.
 <b>variables.tf.template</b>: Template for the variables.tf file. Copy this file to <b>variables.tf</b> and replace the placeholder values with your specific configuration values.
 
+### Architecture
+
+```mermaid
+graph LR
+    subgraph Azure Subscription
+        C(Storage Account)
+        D(Storage Container)
+        E(Virtual Network)
+        F(Subnet)
+        I(Key Vault)
+        J(Application Insights)
+        K(Azure Container Registeries)
+        subgraph Resource Environment ML [ml-resource-group]
+            A(Machine Learning Workspace)
+            B(Compute Cluster)
+            N(Datastore Blob)
+        end
+        subgraph Resource Environment AI [ai-resource-group]
+            G(AI Foundary)
+            H(AI Services)
+            L(AI Hub)
+            M(AI Project)
+        end
+    end
+   
+    C --> D
+    E --> F
+
+    A --> B
+    D --> N
+    N --> A
+    F --> B
+    I --> A
+    J --> A
+    K --> A
+
+    G --> H
+    G --> L
+    L --> M
+    F --> G
+    D --> G
+    I --> G
+    J --> G
+    K --> G
+    style A fill:#f1f,stroke:#333,stroke-width:2px,color:#000
+    style B fill:#ccf,stroke:#333,stroke-width:2px,color:#000
+    style C fill:#c3f,stroke:#333,stroke-width:2px,color:#000
+    style D fill:#c6f,stroke:#333,stroke-width:2px,color:#000
+    style E fill:#c3f,stroke:#333,stroke-width:2px,color:#000
+    style F fill:#c6f,stroke:#333,stroke-width:2px,color:#000
+    style H fill:#ccf,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#f1f,stroke:#333,stroke-width:2px,color:#000
+    style I fill:#c3f,stroke:#333,stroke-width:2px,color:#000
+    style J fill:#c3f,stroke:#333,stroke-width:2px,color:#000
+    style K fill:#c3f,stroke:#333,stroke-width:2px,color:#000
+    style L fill:#ccf,stroke:#333,stroke-width:2px,color:#000
+    style M fill:#ccf,stroke:#333,stroke-width:2px,color:#000
+    style N fill:#ccf,stroke:#333,stroke-width:2px,color:#000
+```
+
 ### Prerequisites
 + Terraform v1.1.0 or higher
 + Azure CLI
